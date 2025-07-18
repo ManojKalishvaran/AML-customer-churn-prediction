@@ -1,0 +1,15 @@
+experiment_name: churn-pipeline
+compute: azureml:cpu-cluster
+
+inputs:
+  input_data: 
+    type: uri_folder
+    mode: ro_mount
+    path: azureml:training-data:1
+  base_line: 70
+
+outputs:
+  output_model: 
+    mode: rw_mount
+
+job: file:../Training/components/train.yml

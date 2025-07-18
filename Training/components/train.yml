@@ -1,0 +1,23 @@
+name: train_model
+display_name: Train Customer Churn Model
+version: 1
+type: command
+
+inputs:
+  input_data: 
+    type: uri_folder
+  base_line:
+    type: integer
+    default: 70
+
+outputs:
+  output_model:
+    type: uri_folder
+
+code: ../src
+environment: azureml://registries/azureml/environments/sklearn-1.5/versions/28
+command: |
+  python training.py \
+    --input_data ${{inputs.input_data}} \
+    --base_line ${{inputs.base_line}} \
+    --output_model ${{outputs.output_model}}
